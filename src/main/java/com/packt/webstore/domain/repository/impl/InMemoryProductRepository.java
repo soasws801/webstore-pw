@@ -10,6 +10,7 @@ import java.util.Set;
 import org.springframework.stereotype.Repository;
 import com.packt.webstore.domain.Product;
 import com.packt.webstore.domain.repository.ProductRepository;
+import com.packt.webstore.exception.ProductNotFoundException;
 
 @Repository
 public class InMemoryProductRepository implements ProductRepository {
@@ -38,21 +39,19 @@ public class InMemoryProductRepository implements ProductRepository {
 	}
 
 	public List<Product> getAllProducts() {
-		return listOfProducts;
-	}
-	
-	public Product getProductById(String productId) {
 		Product productById = null;
-		for (Product product : listOfProducts) {
-			if (product != null && product.getProductId() != null && product.getProductId().equals(productId)) {
-				productById = product;
-				break;
-			}
+		Object productId = null;
+		for(Product product : listOfProducts) {
+		if(product!=null && product.getProductId()!=null
+		&&product.getProductId().equals(productId)){
+		productById = product;
+		break;
 		}
-		if (productById == null) {
-			throw new IllegalArgumentException("No products found with the product id: " + productId);
 		}
-		return productById;
+		if(productById == null){
+		throw new ProductNotFoundException("No products found with the product id: "+ productId);
+		}
+		return (List<Product>) productById;
 	}
 	
 	public List<Product> getProductsByCategory(String category) {
@@ -89,5 +88,20 @@ public class InMemoryProductRepository implements ProductRepository {
 	
 	public void addProduct(Product product) {
 		listOfProducts.add(product);
+	}
+
+	public Product getProductById(String productID) {
+		Product productById = null;
+		for(Product product : listOfProducts) {
+		if(product!=null && product.getProductId()!=null
+		&&product.getProductId().equals(productID)){
+		productById = product;
+		break;
+		}
+		}
+		if(productById == null){
+		throw new ProductNotFoundException("No products found with the product id: "+ productID);
+		}
+		return productById;
 	}
 }

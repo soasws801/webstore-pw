@@ -1,5 +1,6 @@
 package com.packt.webstore.domain;
 
+import javax.validation.constraints.Pattern;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import java.math.BigDecimal;
@@ -9,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @XmlRootElement
 public class Product {
+	@Pattern(regexp="P[0-9]+", message="{Pattern.Product.productId.validatio}")
 	private String productId;
 	private String name;
 	private BigDecimal unitPrice;
