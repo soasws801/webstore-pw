@@ -92,11 +92,6 @@
   		<scope>test</scope>
   	</dependency>
   	<dependency>
-  		<groupId>as org.apache.tiles</groupId>
-  		<artifactId>tiles-extras</artifactId>
-  		<version>3.0.3</version>
-  	</dependency>
-  	<dependency>
   		<groupId>org.slf4j</groupId>
   		<artifactId>slf4j-api</artifactId>
   		<version>1.7.5</version>
